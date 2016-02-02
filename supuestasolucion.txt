@@ -1,0 +1,8 @@
+public class solucio[
+	public int a;
+	public int b;
+	
+	double suma = a + b;
+	
+	sout + tab "El Resultado de la suma  es: "+suma; 
+]
