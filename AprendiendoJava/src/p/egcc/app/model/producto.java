@@ -15,6 +15,10 @@ public class producto {
     private double precio;
     private boolean activo;
 
+    
+    /**ontructor Por Defecto
+     * 
+     */
     public producto(){
         this.nombre = "Curso de Java";
         this.precio = 300;
@@ -22,6 +26,23 @@ public class producto {
         this.activo = true;
         System.out.println("Objeto Creado.");
     }
+    /**
+     * Constructor con parametros
+     * 
+     * @param nombre nombre del producto
+     * @param stock Stock del producto
+     * @param precio Precio del producto
+     * @param activo Estado del producto
+     *                  Si no esta a la venta
+     */
+    public producto(String nombre, int stock, double precio, boolean activo) {
+        this.nombre = nombre;
+        this.stock = stock;
+        this.precio = precio;
+        this.activo = activo;
+    }
+    
+    
 
     @Override
     protected void finalize() throws Throwable {
