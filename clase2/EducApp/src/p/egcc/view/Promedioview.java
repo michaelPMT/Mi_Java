@@ -21,8 +21,8 @@ public class Promedioview extends javax.swing.JFrame {
     private void cargarPaneles(){
         jTabbedPane1.add("2 num", new view());
         jTabbedPane1.add("3 num", new panel3num());
-        jTabbedPane1.add("3 num", new panel4num());
-        jTabbedPane1.add("3 num", new panel5num());
+        jTabbedPane1.add("4 num", new panel4num());
+        jTabbedPane1.add("5 num", new panel5num());
     }
 
     /**

@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 package p.egcc.view;
+import p.egcc.controler.Promedio;
 
-import p.egcc.controler.controlador;
+
 
 /**
  *
@@ -99,8 +100,13 @@ public class view extends javax.swing.JPanel {
         /**
          * Procesar
          */
+        Promedio control = new Promedio();
+        int pr = control.promediar(n1,n2);
         
-        controlador control = new controlador();
+        // Reporte
+        
+        prom.setText("Promedio: " + pr);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
