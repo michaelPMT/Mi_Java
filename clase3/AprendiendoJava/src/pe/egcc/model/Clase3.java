@@ -9,6 +9,6 @@ package pe.egcc.model;
  *
  * @author Alumno
  */
-public class Clase3 {
+public class Clase3 extends Clase2{
     
 }
