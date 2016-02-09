@@ -5,6 +5,8 @@
  */
 package pe.egcc.mateapp.view;
 
+import pe.egcc.mateapp.controller.AppController;
+
 /**
  *
  * @author Alumno
@@ -27,27 +29,84 @@ public class FactorialView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        tx1 = new javax.swing.JTextField();
+        botonProcesar = new javax.swing.JButton();
+        lblRepo = new javax.swing.JLabel();
+
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Factorial");
 
+        jLabel1.setText("Ingresar Numero");
+
+        botonProcesar.setText("Procesar");
+        botonProcesar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonProcesarActionPerformed(evt);
+            }
+        });
+
+        lblRepo.setBackground(new java.awt.Color(0, 102, 102));
+        lblRepo.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        lblRepo.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tx1))
+                        .addGap(44, 44, 44)
+                        .addComponent(botonProcesar)))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27)
+                        .addComponent(tx1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonProcesar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(lblRepo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonProcesarActionPerformed
+        //Dato
+        int n = Integer.parseInt(tx1.getText());
+        
+        //PRoceso
+        AppController control;
+        control = new AppController();
+        long f = control.factorial(n);
+        
+        //Reporte
+        String repo;
+        repo = "Factorial de " + n + " es " + f;
+        lblRepo.setText(repo);
+    }//GEN-LAST:event_botonProcesarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonProcesar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblRepo;
+    private javax.swing.JTextField tx1;
     // End of variables declaration//GEN-END:variables
 }

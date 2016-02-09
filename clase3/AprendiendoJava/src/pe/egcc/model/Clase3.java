@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pe.egcc.mateapp.controller;
-
-import pe.egcc.mateapp.service.MyMath;
+package pe.egcc.model;
 
 /**
  *
  * @author Alumno
  */
-public class AppController {
-
-    public long factorial(int n) {
-       return MyMath.factorial(n);
-    }
+public class Clase3 {
     
 }

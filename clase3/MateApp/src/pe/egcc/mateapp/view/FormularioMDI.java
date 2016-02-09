@@ -82,6 +82,11 @@ public class FormularioMDI extends javax.swing.JFrame {
         menuMate.add(menuMateFibonacci);
 
         menuMatePrimo.setText("Primo");
+        menuMatePrimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMatePrimoActionPerformed(evt);
+            }
+        });
         menuMate.add(menuMatePrimo);
 
         menuBar.add(menuMate);
@@ -108,30 +113,23 @@ public class FormularioMDI extends javax.swing.JFrame {
 
     private void menuMateFactorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMateFactorialActionPerformed
         /**
-         * Para cargar la el panel interno           
-        JInternalFrame view;
-        view = new FactorialView();
-        desktopPane.add(view);
-        view.setVisible(true);
+         * Para cargar la el panel interno JInternalFrame view; view = new
+         * FactorialView(); desktopPane.add(view); view.setVisible(true);
          */
+        cargarFormulario(FactorialView.class);
     }//GEN-LAST:event_menuMateFactorialActionPerformed
 
     private void menuMateMcdMcmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMateMcdMcmActionPerformed
-        /**
-         * JInternalFrame view;
-        view =  new McdMcmView();
-        desktopPane.add(view);
-        view.setVisible(true);
-         */
-        
+        cargarFormulario(McdMcmView.class);
     }//GEN-LAST:event_menuMateMcdMcmActionPerformed
 
     private void menuMateFibonacciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMateFibonacciActionPerformed
-        /**
-        JInternalFrame view;
-        view = new
-        */
+        cargarFormulario(FibonacciView.class);
     }//GEN-LAST:event_menuMateFibonacciActionPerformed
+
+    private void menuMatePrimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMatePrimoActionPerformed
+        cargarFormulario(PrimoView.class);
+    }//GEN-LAST:event_menuMatePrimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,5 +177,38 @@ public class FormularioMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMateMcdMcm;
     private javax.swing.JMenuItem menuMatePrimo;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarFormulario(Class<?> aClass) {
+        try {
+            //Variable
+            JInternalFrame view;
+
+            //Buscar Instancia
+            view = buscarInstancia(aClass);
+
+            // Crear Instancia
+            if (view == null) {
+                view = (JInternalFrame) Class.forName(aClass.getName()).newInstance();
+                desktopPane.add(view);
+            }
+
+            //Mostrar Formulario
+            view.setVisible(true);
+            view.setSelected(true);
+        } catch (Exception e) {
+
+        }
+    }
+
+    private JInternalFrame buscarInstancia(Class<?> aClass) {
+        JInternalFrame view = null;
+        for (JInternalFrame form : desktopPane.getAllFrames()) {
+            if (aClass.isInstance(form)) {
+                view = form;
+                break;
+            }
+        }
+        return view;
+    }
 
 }
