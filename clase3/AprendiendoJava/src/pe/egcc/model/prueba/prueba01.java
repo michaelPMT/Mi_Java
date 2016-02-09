@@ -13,10 +13,12 @@ import pe.egcc.model.Clase4;
  */
 public class prueba01 {
     public static void main(String[] args) {
-        int s;
+        int s, d;
         Clase4 bean = new Clase4();
         s = bean.sumar(5, 8);
+        d = bean.Restar(4, 3);
         System.out.println("La suma de 5 y 8 es : " + s);
+        System.out.println("LA Resta de 4 y 3 son : " + d);
     }
     
 }
