@@ -1,6 +1,9 @@
 
 package pe.egcc.ventaapp.view;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pe.egcc.ventaapp.controller.VentaController;
 import pe.egcc.ventaapp.dto.ItemDto;
@@ -35,6 +38,7 @@ public class VentaView extends javax.swing.JFrame {
     btnProcesar = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     tblaDatos = new javax.swing.JTable();
+    lblTexto = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("VENTA");
@@ -77,6 +81,12 @@ public class VentaView extends javax.swing.JFrame {
     });
     jScrollPane1.setViewportView(tblaDatos);
 
+    lblTexto.setBackground(new java.awt.Color(51, 51, 51));
+    lblTexto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    lblTexto.setForeground(new java.awt.Color(204, 255, 255));
+    lblTexto.setText("jLabel3");
+    lblTexto.setOpaque(true);
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -94,7 +104,8 @@ public class VentaView extends javax.swing.JFrame {
               .addComponent(cboTipo, 0, 106, Short.MAX_VALUE)
               .addComponent(txtTotal))
             .addGap(18, 18, 18)
-            .addComponent(btnProcesar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(btnProcesar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(lblTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap(70, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -112,30 +123,65 @@ public class VentaView extends javax.swing.JFrame {
               .addComponent(jLabel2)
               .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-        .addContainerGap())
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(lblTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addContainerGap(73, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
   private void btnProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarActionPerformed
-    // Datos
-    double total = Double.parseDouble(txtTotal.getText());
-    String tipo = cboTipo.getSelectedItem().toString();
-    // proceso
-    ItemDto[] data = control.procesar(tipo, total);
-    // Mostrar tabla
-    DefaultTableModel tabla;
-    tabla = (DefaultTableModel) tblaDatos.getModel();
-    tabla.setRowCount(0);
-    for (ItemDto dto : data) {
-      Object[] rowData = {dto.getConcepto(), dto.getValor()};
-      tabla.addRow(rowData);
+    String texto = "";
+    try {
+      // Inicio
+      texto = "Inicio: " + getHora();
+      lblTexto.setText(texto);
+      // Datos
+      double total = Double.parseDouble(txtTotal.getText());
+      String tipo = cboTipo.getSelectedItem().toString();
+      // Verificar importe
+      if(total <= 0.0){
+        throw new Exception("Importe debe ser mayor que cero.");
+      }
+      // proceso
+      ItemDto[] data = control.procesar(tipo, total);
+      // Mostrar tabla
+      DefaultTableModel tabla;
+      tabla = (DefaultTableModel) tblaDatos.getModel();
+      tabla.setRowCount(0);
+      for (ItemDto dto : data) {
+        Object[] rowData = {dto.getConcepto(), dto.getValor()};
+        tabla.addRow(rowData);
+      }
+      // Limpiar los conroles
+      cboTipo.setSelectedIndex(-1);
+      txtTotal.setText("");
+    } catch (NumberFormatException e) {
+      JOptionPane.showMessageDialog(
+              rootPane,
+              "El Total debe ser numérico.", 
+              "ERROR", 
+              JOptionPane.ERROR_MESSAGE);
+    } catch(NullPointerException e){
+      JOptionPane.showMessageDialog(
+              rootPane,
+              "Debe seleccionar un tipo de documento.", 
+              "ERROR", 
+              JOptionPane.ERROR_MESSAGE);
+    } catch(Exception e){
+      String msg = "Error en el proceso.";
+      if(e.getMessage() != null && !e.getMessage().isEmpty()){
+        msg += "\n" + e.getMessage();
+      }
+      JOptionPane.showMessageDialog(
+              rootPane, msg, "ERROR", 
+              JOptionPane.ERROR_MESSAGE);
+    } finally{
+      texto += "  Final: " + getHora();
+      lblTexto.setText(texto);
     }
-    // Limpiar los conroles
-    cboTipo.setSelectedIndex(-1);
-    txtTotal.setText("");
   }//GEN-LAST:event_btnProcesarActionPerformed
 
   /**
@@ -179,6 +225,7 @@ public class VentaView extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JLabel lblTexto;
   private javax.swing.JTable tblaDatos;
   private javax.swing.JTextField txtTotal;
   // End of variables declaration//GEN-END:variables
@@ -189,5 +236,11 @@ public class VentaView extends javax.swing.JFrame {
       cboTipo.addItem(tipo);
     }
     cboTipo.setSelectedIndex(-1);
+  }
+
+  private String getHora() {
+    Date ahora = new Date();
+    SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss.SSSS");
+    return formateador.format(ahora);
   }
 }

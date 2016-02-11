@@ -41,6 +41,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnProcesar" min="-2" pref="129" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="lblTexto" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="70" max="32767" attributes="0"/>
           </Group>
@@ -65,8 +66,10 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="180" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="193" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblTexto" min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -143,5 +146,20 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblTexto">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="33" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel3"/>
+        <Property name="opaque" type="boolean" value="true"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
